@@ -1,4 +1,5 @@
 import axios, { Method } from "axios";
+import Cookies from "js-cookie";
 
 type Options = {
   headers?: { [x: string]: string };
@@ -10,19 +11,18 @@ type Options = {
 
 export default class ClientBase {
   requestHeaders: { [x: string]: string } = {};
-  urlVersion = "/api";
-  token = "";
+  token = Cookies.get("access_token") || "";
 
   constructor() {}
 
   getBaseRoute = () => {
-    return `https://659ea92c47ae28b0bd366aa5.mockapi.io/movie`;
+    return `https://frontend-exam.digitalfortress.dev`;
   };
 
   setToken = (token: string) => {
     if (token) {
       this.token = token;
-      this.requestHeaders.Authorization = `bearer ${token}`;
+      this.requestHeaders.Authorization = `${token}`;
     } else {
       this.token = "";
       delete this.requestHeaders.Authorization;
