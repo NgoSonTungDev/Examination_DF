@@ -22,7 +22,7 @@ export default class ClientBase {
   setToken = (token: string) => {
     if (token) {
       this.token = token;
-      this.requestHeaders.Authorization = `${token}`;
+      this.requestHeaders.Authorization = `bearer ${token}`;
     } else {
       this.token = "";
       delete this.requestHeaders.Authorization;
